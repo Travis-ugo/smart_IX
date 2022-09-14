@@ -27,6 +27,7 @@ dependencies:
   formz: ^0.4.1
   stream_transform: ^2.0.0
   bloc_concurrency: ^0.2.0
+  geolocator: ^9.0.1
 
 dev_dependencies:
   flutter_test:
