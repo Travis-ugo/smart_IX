@@ -86,30 +86,30 @@ the core folders include
 
 ## Folder Structure: 
 
-smart_ix /
-|- application /
-    |- authentication / 
-    |- smart_device /
-    |- weather /
-   
-|- domain /
-    |- authentication /
-    |- database /
-    |- core /
-    |- weather /
-    
-|- infrastructure /
-    |- authentication /
-    |- core /
-    |- smart_device /
-    |- weather /
-	
-|- presentation /
-    |- routes /
-    |- view /
-    |- widgets /
-    
-|- view.dart
+	smart_ix /
+	|- application /
+	    |- authentication / 
+	    |- smart_device /
+	    |- weather /
+
+	|- domain /
+	    |- authentication /
+	    |- database /
+	    |- core /
+	    |- weather /
+
+	|- infrastructure /
+	    |- authentication /
+	    |- core /
+	    |- smart_device /
+	    |- weather /
+
+	|- presentation /
+	    |- routes /
+	    |- view /
+	    |- widgets /
+
+	|- view.dart
 
 	
 	
