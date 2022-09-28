@@ -56,10 +56,7 @@ One of the biggest advantages of using Cubit is simplicity. When creating a C
 ### Bloc
 One of the biggest advantages of using Bloc is knowing the sequence of state changes as well as exactly what triggered those changes. For a state that is critical to the functionality of an application, it might be very beneficial to use a more event-driven approach in order to capture all events in addition to state changes.
 
-check out the written bloc documentation to know more about the Bloc state management pattern. [bloc documentation](https://docs.flutter.dev/](https://bloclibrary.dev/#/),
-![images](https://user-images.githubusercontent.com/68594765/192904363-7d755ad8-756b-4b40-9a53-7771e7c5da13.png)
-￼
-
+check out the written bloc documentation to know more about the Bloc state management pattern. [bloc documentation](https://docs.flutter.dev/]
   
 
 ## Set-Up
