@@ -37,7 +37,8 @@ void main() {
     });
 
     group('getWeather', () {
-      const cityName = 'mock_cityName';
+      const mockLon = 6.6824816;
+      const mockLat = 6.242381;
 
       test('make correct http request', () async {
         when(() => mockHttpResponse.statusCode).thenReturn(200);
@@ -45,7 +46,8 @@ void main() {
         when(() => httpClient.get(any()))
             .thenAnswer((_) async => mockHttpResponse);
         try {
-          await metaApiClient.getCurrentWeather(cityName: cityName);
+          // await metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon);
+          await metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon);
         } catch (_) {}
         verify(
           () => httpClient.get(
@@ -60,7 +62,8 @@ void main() {
         when(() => httpClient.get(any()))
             .thenAnswer((_) async => mockHttpResponse);
         expect(
-          () async => metaApiClient.getCurrentWeather(cityName: cityName),
+          () async =>
+              metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon),
           throwsA(isA<WeatherRequestFailure>()),
         );
       });
@@ -71,7 +74,8 @@ void main() {
         when(() => httpClient.get(any()))
             .thenAnswer((_) async => mockHttpResponse);
         expect(
-          () async => metaApiClient.getCurrentWeather(cityName: cityName),
+          () async =>
+              metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon),
           throwsA(isA<WeatherNotFoundFailure>()),
         );
       });

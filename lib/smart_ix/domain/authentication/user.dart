@@ -1,5 +1,6 @@
 import 'package:smart_ix/smart_ix/domain/domain.dart';
 
+/// User
 class User extends Equatable {
   final String id;
   final String? name;
