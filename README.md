@@ -1,12 +1,18 @@
 # smart_ix
 
-## About Smart Ix.
+## About Smart Ix.⚡️⚡️
 the smart Ix is a home automation assistance that lets you control a large family of devices across your home. The smart Ix application gives the ability to automate activities of your smart home devices by setting up a routine, routines allow you set up commands for your smart home devices which can be triggered by an action or time set for its execution. Setting up scenes to execute a common activity at the same time, the scene allows executing multiple commands at the same time without having to reorder your smart devices.
-the smart Ix mobile applications are built with flutter.
+the smart Ix mobile applications are built with flutter. 
+
+<div>
+<img src = "https://user-images.githubusercontent.com/68594765/192907795-ad6d36d8-ee1e-49e0-8f5f-9756647e7c61.png" width = "24%">
+<img src = "https://user-images.githubusercontent.com/68594765/192907799-315546cb-372c-4187-8bfd-80d285c821c3.png" width = "24%">
+<img src = "https://user-images.githubusercontent.com/68594765/192907802-224948ba-d6a1-4440-a326-fb6f73b90fe5.png" width = "24%">
+<img src = "https://user-images.githubusercontent.com/68594765/192907805-3023a7d1-5f96-4dd5-adb2-c0e06ce48a51.png" width = "24%">
+</div>
 
 
-
-## Getting Started with flutter
+## Getting Started with flutter🚀🚀
 
 The smart Ix applications are built with flutter, so installing the flutter SDK on your machine is a must.
 Depending on the machine to be installed, flutter provides different versions of the SDK to suit your preferred operating system. 
@@ -23,14 +29,14 @@ For help getting started with Flutter development and Firebase for flutter, view
 samples, guidance on mobile development, and a full API reference.
 
 
-### state management.
+### state management.✅
 
 the smart ix application implant the bloc pattern as its state management tool, 
 Flutter bloc is state management for flutter applications, used to manage and handle all possible states of the application in an easy, 
 and more readable way.
 
 
-### Key concepts:
+### Key concepts:🦾
 
 ### BlocProvider:
   is a Flutter widget that provides a bloc to its children via BlocProvider.of<T>(context). 
@@ -59,7 +65,7 @@ One of the biggest advantages of using Bloc is knowing the sequence of state c
 check out the written bloc documentation to know more about the Bloc state management pattern. [bloc documentation]([https://docs.flutter.dev](https://bloclibrary.dev/#/gettingstarted)/]
   
 
-## Set-Up
+## Set-Up 🔧
 
 The projects lib folder contains various folders which handle different sections and functionality within the application.
 the core folders include 
@@ -81,7 +87,7 @@ the core folders include
 
 ###  The presentation layer implant the user interfaces, and all that is required of the user to see on the screen.
 
-## Folder Structure: 
+## Folder Structure: 🗂
 
 	smart_ix /
 	|- application /
@@ -110,7 +116,7 @@ the core folders include
 
 	
 	
-## App Permissions:
+## App Permissions: 🚫
  the smart ix requires user permission to get location to fetch weather data.
 	
 	 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -118,7 +124,7 @@ the core folders include
 
 	
 
-## How to use
+## How to use ❔ ✅
 ### Step 1:
 Download or clone this repo by using the link below:
 
