@@ -76,11 +76,11 @@ the core folders include
 ###  Infrastructure layer:
   implements the Interfaces created in the domain layer, the content is the repository of the application which holds primarily three repositories which include 
   
-   		>>  The AuthenticationRepository is responsible for abstracting the internal implementation details of how we authenticate and fetch user information. In this case, it will be integrating with Firebase but we can always change the internal implementation later on and our application will be unaffected.
+   	>>  The AuthenticationRepository is responsible for abstracting the internal implementation details of how we authenticate and fetch user information. In this case, it will be integrating with Firebase but we can always change the internal implementation later on and our application will be unaffected.
 
-		>> The DataBaseRepository is responsible for abstracting the internal implementation of how we store the user and edit the user data, we will be using the firebase firefirestore database data storage to have persistent data among different mobile devices with the same user signed in.
+	>> The DataBaseRepository is responsible for abstracting the internal implementation of how we store the user and edit the user data, we will be using the firebase firefirestore database data storage to have persistent data among different mobile devices with the same user signed in.
 		
-		>> The WeatherRepository is responsible for abstracting the implementation of how weather data is fetched, using the metadata weather API to get current location weather conditions.  [metaApi documentation](https://docs.flutter.dev/](https://openweathermap.org/api/weather-map-1h),   
+	>> The WeatherRepository is responsible for abstracting the implementation of how weather data is fetched, using the metadata weather API to get current location weather conditions.  [metaApi documentation](https://docs.flutter.dev/](https://openweathermap.org/api/weather-map-1h),   
 
 ###  The presentation layer implant the user interfaces, and all that is required of the user to see on the screen.
 
@@ -131,52 +131,52 @@ flutter pub get
 	
 	
 
-		name: smart_ix
-		description: smart_ix home assistance.
+	name: smart_ix
+	description: smart_ix home assistance.
 
-		publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+	publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-		version: 1.0.0+1
+	version: 1.0.0+1
 
-		environment:
-		sdk: ">=2.17.1 <3.0.0"
-
-
-		dependencies:
-		flutter:
-		sdk: flutter
-		cupertino_icons: ^1.0.2
-		firebase_core: ^1.22.0
-		firebase_auth: ^3.8.0
-		cloud_firestore: ^3.4.8
-		equatable: ^2.0.5
-		google_sign_in: ^5.4.1
-		flow_builder: ^0.0.9
-		flutter_bloc: ^8.1.1
-		google_fonts: ^3.0.1
-		flutter_svg: ^1.1.5
-		json_annotation: ^4.6.0
-		path_provider: ^2.0.11
-		http: ^0.13.0
-		formz: ^0.4.1
-		google_nav_bar: ^5.0.6
-		geolocator: ^9.0.1
+	environment:
+	sdk: ">=2.17.1 <3.0.0"
 
 
+	dependencies:
+	flutter:
+	sdk: flutter
+	cupertino_icons: ^1.0.2
+	firebase_core: ^1.22.0
+	firebase_auth: ^3.8.0
+	cloud_firestore: ^3.4.8
+	equatable: ^2.0.5
+	google_sign_in: ^5.4.1
+	flow_builder: ^0.0.9
+	flutter_bloc: ^8.1.1
+	google_fonts: ^3.0.1
+	flutter_svg: ^1.1.5
+	json_annotation: ^4.6.0
+	path_provider: ^2.0.11
+	http: ^0.13.0
+	formz: ^0.4.1
+	google_nav_bar: ^5.0.6
+	geolocator: ^9.0.1
 
-		dev_dependencies:
-		flutter_test:
-		sdk: flutter
-		flutter_lints: ^2.0.0
-		mocktail: ^0.3.0
-		bloc_test: ^9.1.0
-		build_runner: ^2.2.0
-		json_serializable: ^6.3.1
-		plugin_platform_interface: ^2.1.2
 
-		flutter:
-		generate: true
-		uses-material-design: true
+
+	dev_dependencies:
+	flutter_test:
+	sdk: flutter
+	flutter_lints: ^2.0.0
+	mocktail: ^0.3.0
+	bloc_test: ^9.1.0
+	build_runner: ^2.2.0
+	json_serializable: ^6.3.1
+	plugin_platform_interface: ^2.1.2
+
+	flutter:
+	generate: true
+	uses-material-design: true
 
 	
 
