@@ -1,20 +1,33 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'weather.g.dart';
+
 @JsonSerializable()
 class Weather {
   final String name;
 
-  final Temperature main;
+  final Temperature tempInfo;
   final WeatherInfo weather;
 
   const Weather({
     required this.name,
-    required this.main,
+    required this.tempInfo,
     required this.weather,
   });
 
-  factory Weather.fromJson(Map<String, dynamic> json) =>
-      _$WeatherFromJson(json);
+  factory Weather.fromJson(Map<String, dynamic> json) {
+    final cityName = json['name'];
+
+    final tempInfo = Temperature.fromJson(
+      json['main'],
+    );
+
+    final weather = WeatherInfo.fromJson(json['weather'][0]);
+    return Weather(
+      name: cityName,
+      tempInfo: tempInfo,
+      weather: weather,
+    );
+  }
 }
 
 @JsonSerializable()
@@ -29,9 +42,9 @@ class WeatherInfo {
 
 @JsonSerializable()
 class Temperature {
-  final double temperature;
+  final double temp;
 
-  Temperature({required this.temperature});
+  Temperature({required this.temp});
 
   factory Temperature.fromJson(Map<String, dynamic> json) =>
       _$TemperatureFromJson(json);

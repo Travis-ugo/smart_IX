@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:smart_ix/smart_ix/infrastructure/infrastructure.dart';
 
+/// https://pub.dev/packages/http
+/// the HTTP package is used to make api request.
 class MetaAPiClient implements IMetaApiClient {
   MetaAPiClient({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
@@ -8,46 +10,44 @@ class MetaAPiClient implements IMetaApiClient {
 
   static const openWeatherApi = 'api.openweathermap.org';
 
-  static const data_weather = '/data/2.5/weather';
+  static const dataWeather = '/data/2.5/weather';
 
-  final queryParameters = {
-    'q': 'asaba',
-    'appid': '718bee2be81541e7f7436b792aaf1540',
-    'units': 'imperial',
-  };
+  /// getCurrentWeather uses location return by the getCurrentLocation
+  /// function which uses the geolocator package to get current user location,
+  /// and displays live weather information.
   @override
-  Future<Weather> getCurrentWeather({required String cityName}) async {
-    print('get weather called');
+  Future<Weather> getCurrentWeather(
+      {required double lat, required double lon}) async {
+    /// https://openweathermap.org/api
+    final queryParameters = {
+      'lat': '$lat',
+      'lon': '$lon',
+      'appid': '718bee2be81541e7f7436b792aaf1540',
+      'units': 'imperial',
+    };
+
     final weatherRequestUri =
-        Uri.https(openWeatherApi, data_weather, queryParameters);
+        Uri.https(openWeatherApi, dataWeather, queryParameters);
     final weatherResponse = await _httpClient.get(weatherRequestUri);
 
     if (weatherResponse.statusCode != 200) {
       throw WeatherRequestFailure();
     }
 
-    final jsonBody = jsonDecode(weatherResponse.body) as Map<String, dynamic>;
-    print(jsonBody);
-    if (jsonBody.isEmpty) {
-      throw WeatherNotFoundFailure();
-    }
-    // research about this
-    final weatherResponseBody = jsonBody['consolidated_weather'] as List;
+    final jsonBody = jsonDecode(weatherResponse.body);
 
-    if (weatherResponseBody.isEmpty) {
-      throw WeatherNotFoundFailure();
-    }
-    print(weatherResponseBody.first);
-    return Weather.fromJson(weatherResponseBody.first as Map<String, dynamic>);
+    return Weather.fromJson(jsonBody);
   }
 
+  /// https://pub.dev/packages/geolocator
+  /// getCurrentLocation uses the Geolocator package to get the current user location,
+  /// returns the latitude and longitude
   @override
   Future<Position> getCurrentLocation() async {
-    print('get position called');
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Test if location services are enabled.
+    /// Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error('Location services are disabled.');
@@ -68,8 +68,6 @@ class MetaAPiClient implements IMetaApiClient {
 
     Position position = await Geolocator.getCurrentPosition();
 
-    print(
-        'Current position is latitude${position.latitude} , and longitude${position.longitude}');
     return position;
   }
 }

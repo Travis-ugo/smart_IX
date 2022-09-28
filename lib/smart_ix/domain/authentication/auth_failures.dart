@@ -1,3 +1,8 @@
+/// Firebase provides proper documentation for error handling,
+/// and various authentication error. for more on error handling.
+/// check out the link below.
+/// https://pub.dev/documentation/firebase_auth_platform_interface/latest/firebase_auth_platform_interface/FirebaseAuthException-class.html
+
 class SignUpWithEmailAndPasswordFailure implements Exception {
   const SignUpWithEmailAndPasswordFailure([
     this.message = 'An unknown exception occurred',
@@ -33,80 +38,80 @@ class SignUpWithEmailAndPasswordFailure implements Exception {
   }
 }
 
-class LoginWithEmailAndPasswordFailure implements Exception {
+class SigninWithEmailAndPasswordFailure implements Exception {
   final String message;
 
-  const LoginWithEmailAndPasswordFailure([
+  const SigninWithEmailAndPasswordFailure([
     this.message = 'An unknown exception occurred',
   ]);
 
-  factory LoginWithEmailAndPasswordFailure.fromCode(String code) {
+  factory SigninWithEmailAndPasswordFailure.fromCode(String code) {
     switch (code) {
       case 'invalid-email':
-        return const LoginWithEmailAndPasswordFailure(
+        return const SigninWithEmailAndPasswordFailure(
           'Email is not valid or badly formatted.',
         );
       case 'user-disabled':
-        return const LoginWithEmailAndPasswordFailure(
+        return const SigninWithEmailAndPasswordFailure(
           'This user has been disabled. Please contact support for help.',
         );
       case 'user-not-found':
-        return const LoginWithEmailAndPasswordFailure(
+        return const SigninWithEmailAndPasswordFailure(
           'Email is not found, please create an account.',
         );
       case 'wrong-password':
-        return const LoginWithEmailAndPasswordFailure(
+        return const SigninWithEmailAndPasswordFailure(
           'Incorrect password, please try again.',
         );
       default:
-        return const LoginWithEmailAndPasswordFailure();
+        return const SigninWithEmailAndPasswordFailure();
     }
   }
 }
 
-class LoginWithGoogleFailure implements Exception {
+class SigninWithGoogleFailure implements Exception {
   final String message;
 
-  const LoginWithGoogleFailure([
+  const SigninWithGoogleFailure([
     this.message = 'An unknown exception occurred',
   ]);
 
-  factory LoginWithGoogleFailure.fromCode(String code) {
+  factory SigninWithGoogleFailure.fromCode(String code) {
     switch (code) {
       case 'account-exists-with-different-credential':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'Account exists with different credentials.',
         );
       case 'invalid-credential':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'The credential received is malformed or has expired.',
         );
       case 'operation-not-allowed':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'Operation is not allowed.  Please contact support.',
         );
       case 'user-disabled':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'This user has been disabled. Please contact support for help.',
         );
       case 'user-not-found':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'Email is not found, please create an account.',
         );
       case 'wrong-password':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'Incorrect password, please try again.',
         );
       case 'invalid-verification-code':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'The credential verification code received is invalid.',
         );
       case 'invalid-verification-id':
-        return const LoginWithGoogleFailure(
+        return const SigninWithGoogleFailure(
           'The credential verification ID received is invalid.',
         );
       default:
-        return const LoginWithGoogleFailure();
+        return const SigninWithGoogleFailure();
     }
   }
 }

@@ -2,33 +2,38 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:smart_ix/smart_ix/infrastructure/infrastructure.dart';
 
 class AuthenticationRepository implements IAuthentication {
-  final CacheClient _cache;
   final GoogleSignIn _googleSignIn;
   final firebase_auth.FirebaseAuth _firebaseAuth;
 
   AuthenticationRepository({
-    CacheClient? cache,
     GoogleSignIn? googleSignIn,
     firebase_auth.FirebaseAuth? firebaseAuth,
-  })  : _cache = cache ?? CacheClient(),
-        _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
+  })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
 
-  static const userCacheKey = '__user_cache__key';
+  /// gets current firebase user id.
+  String get firebaseUserId {
+    return _firebaseAuth.currentUser!.uid;
+  }
 
+  /// exposes a stream to get authentication status from firebase auth
+  /// and emits a new value when the user is either authenticated or unauthenticated.
+  var currentUser = User.empty;
   Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
+      currentUser = user;
 
-      _cache.write(key: userCacheKey, value: user);
       return user;
     });
   }
 
-  User get currentUser {
-    return _cache.read<User>(key: userCacheKey) ?? User.empty;
-  }
-
+  /// firebase provides and easy signin and login function to authenticate users
+  /// with email and password.
+  /// the signup function is an implementation of the abstract method in the file:
+  /// domain/database/i_routine.dart
+  /// the signup function creates a new user account, and throws an error if the email,
+  /// is already used
   @override
   Future<void> signUp({required String email, required String password}) async {
     try {
@@ -43,8 +48,12 @@ class AuthenticationRepository implements IAuthentication {
     }
   }
 
+  /// Firebase provides and easy signup and sign in method with user social account
+  /// the function below uses firebase easy social auth, google account to register
+  /// or signin the user credentials.
+
   @override
-  Future<void> loginWithGoogle() async {
+  Future<void> signinWithGoogle() async {
     try {
       late final firebase_auth.AuthCredential credential;
       final googleUser = await _googleSignIn.signIn();
@@ -56,14 +65,18 @@ class AuthenticationRepository implements IAuthentication {
 
       await _firebaseAuth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      throw LoginWithGoogleFailure.fromCode(e.code);
+      throw SigninWithGoogleFailure.fromCode(e.code);
     } catch (_) {
-      throw const LoginWithGoogleFailure();
+      throw const SigninWithGoogleFailure();
     }
   }
 
+  /// firebase authentication with existing user email and password
+  /// the function throws an error if the email and address does'nt match,
+  /// or does not exist
+
   @override
-  Future<void> loginWithEmailAndPassword({
+  Future<void> signinWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -73,12 +86,13 @@ class AuthenticationRepository implements IAuthentication {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      throw LoginWithEmailAndPasswordFailure.fromCode(e.code);
+      throw SigninWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {
-      throw const LoginWithEmailAndPasswordFailure();
+      throw const SigninWithEmailAndPasswordFailure();
     }
   }
 
+  /// the logout function to resets the authentication state, and sets the current user to null.
   @override
   Future<void> logOut() async {
     try {

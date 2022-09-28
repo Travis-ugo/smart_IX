@@ -11,8 +11,6 @@ import 'package:firebase_core_platform_interface/firebase_core_platform_interfac
 const _mockFirebaseUserUid = 'mock_uid';
 const _mockFirebaseEmail = 'mock_email';
 
-class MockCacheClient extends Mock implements CacheClient {}
-
 class MockFirebaseAuth extends Mock implements firebase_auth.FirebaseAuth {}
 
 class MockFirebaseCore extends Mock
@@ -46,7 +44,6 @@ void main() {
   );
 
   group('AuthenticationRepository', () {
-    late CacheClient cache;
     late firebase_auth.FirebaseAuth firebaseAuth;
     late GoogleSignIn googleSignIn;
     late AuthenticationRepository authenticationRepository;
@@ -79,11 +76,9 @@ void main() {
 
       Firebase.delegatePackingProperty = firebaseCore;
 
-      cache = MockCacheClient();
       firebaseAuth = MockFirebaseAuth();
       googleSignIn = MockGoogleSignIn();
       authenticationRepository = AuthenticationRepository(
-        cache: cache,
         firebaseAuth: firebaseAuth,
         googleSignIn: googleSignIn,
       );
@@ -147,7 +142,7 @@ void main() {
       );
     });
 
-    group('LoginWithGoogle', () {
+    group('SigninWithGoogle', () {
       const accessToken = 'access-token';
       const idToken = 'id-token';
 
@@ -174,13 +169,13 @@ void main() {
       });
 
       test('calls signIn authentication, and signInWithCredential', () async {
-        await authenticationRepository.loginWithGoogle();
+        await authenticationRepository.signinWithGoogle();
         verify(() => googleSignIn.signIn()).called(1);
         verify(() => firebaseAuth.signInWithCredential(any())).called(1);
       });
 
       test('succeeds when signIn withGoogle succeeds', () {
-        expect(authenticationRepository.loginWithGoogle(), completes);
+        expect(authenticationRepository.signinWithGoogle(), completes);
       });
 
       test('throws auth failure when error occurs', () {
@@ -188,13 +183,13 @@ void main() {
             .thenThrow(Exception());
 
         expect(
-          authenticationRepository.loginWithGoogle(),
-          throwsA(isA<LoginWithGoogleFailure>()),
+          authenticationRepository.signinWithGoogle(),
+          throwsA(isA<SigninWithGoogleFailure>()),
         );
       });
     });
 
-    group('login with email and password', () {
+    group('Signin with email and password', () {
       setUp(() {
         when(
           () => firebaseAuth.signInWithEmailAndPassword(
@@ -203,7 +198,7 @@ void main() {
       });
 
       test('calls signInWithEmailAndPassword', () async {
-        await authenticationRepository.loginWithEmailAndPassword(
+        await authenticationRepository.signinWithEmailAndPassword(
             email: email, password: password);
 
         verify(() => firebaseAuth.signInWithEmailAndPassword(
@@ -212,14 +207,14 @@ void main() {
 
       test('succeeds when signInWithEmailAndPassword succeeds', () {
         expect(
-          authenticationRepository.loginWithEmailAndPassword(
+          authenticationRepository.signinWithEmailAndPassword(
               email: email, password: password),
           completes,
         );
       });
 
       test(
-          'throws LogInWithEmailAndPasswordFailure '
+          'throws SigninWithEmailAndPasswordFailure '
           'when signInWithEmailAndPassword throws', () {
         when(
           () => firebaseAuth.signInWithEmailAndPassword(
@@ -227,10 +222,10 @@ void main() {
         ).thenThrow(Exception());
 
         expect(
-          authenticationRepository.loginWithEmailAndPassword(
+          authenticationRepository.signinWithEmailAndPassword(
               email: email, password: password),
           throwsA(
-            isA<LoginWithEmailAndPasswordFailure>(),
+            isA<SigninWithEmailAndPasswordFailure>(),
           ),
         );
       });
@@ -250,48 +245,6 @@ void main() {
           authenticationRepository.logOut(),
           throwsA(isA<LogOutFailure>()),
         );
-      });
-    });
-
-    group('User', () {
-      test('emits User.empty when firebase is null', () async {
-        when(() => firebaseAuth.authStateChanges())
-            .thenAnswer((_) => Stream.value(null));
-        await expectLater(authenticationRepository.user,
-            emitsInOrder(const <User>[User.empty]));
-      });
-
-      test('emits User when firebase user is not null', () async {
-        final firebaseUser = MockFirebaseUser();
-        when(() => firebaseUser.uid).thenReturn(_mockFirebaseUserUid);
-        when(() => firebaseUser.email).thenReturn(_mockFirebaseEmail);
-        when(() => firebaseUser.photoURL).thenReturn(null);
-        when(() => firebaseAuth.authStateChanges())
-            .thenAnswer((_) => Stream.value(firebaseUser));
-        await expectLater(
-          authenticationRepository.user,
-          emitsInOrder(const <User>[user]),
-        );
-
-        verify(
-          () => cache.write(
-              key: AuthenticationRepository.userCacheKey, value: user),
-        ).called(1);
-      });
-    });
-
-    group('current User', () {
-      test('return User.empty when cache is null', () {
-        when(() => cache.read(key: AuthenticationRepository.userCacheKey))
-            .thenReturn(null);
-        expect(authenticationRepository.currentUser, equals(User.empty));
-      });
-
-      test('return users when cached user is not null', () {
-        when(() => cache.read<User>(key: AuthenticationRepository.userCacheKey))
-            .thenReturn(user);
-
-        expect(authenticationRepository.currentUser, equals(user));
       });
     });
   });

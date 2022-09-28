@@ -5,6 +5,10 @@ import 'package:smart_ix/smart_ix/application/application.dart';
 part 'app_event.dart';
 part 'app_state.dart';
 
+/// the AppBloc is responsible for listening to the firebase auth for new auth state.
+/// the AuthenticationRepository.
+/// subscribe to a stream of user, to notify whenever the auth state changes
+
 class AppBloc extends Bloc<AppEvent, AppState> {
   final AuthenticationRepository _authenticationRepository;
   late final StreamSubscription<User> _userSubscription;
@@ -35,6 +39,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     unawaited(_authenticationRepository.logOut());
   }
 
+  /// cancel stream subscription
   @override
   Future<void> close() {
     _userSubscription.cancel();
