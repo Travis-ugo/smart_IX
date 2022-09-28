@@ -84,8 +84,101 @@ the core folders include
 
 ###  The presentation layer implant the user interfaces, and all that is required of the user to see on the screen.
 
-  
+## Folder Structure: 
 
+smart_ix /
+|- application /
+    |- authentication / 
+    |- smart_device /
+    |- weather /
+   
+|- domain /
+    |- authentication /
+    |- database /
+    |- core /
+    |- weather /
+    
+|- infrastructure /
+    |- authentication /
+    |- core /
+    |- smart_device /
+    |- weather /
+	
+|- presentation /
+    |- routes /
+    |- view /
+    |- widgets /
+    
+|- view.dart
+
+	
+	
+## App Permissions:
+ the smart ix requires user permission to get location to fetch weather data.
+	
+	 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+ 	 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+	
+
+## How to use
+### Step 1:
+Download or clone this repo by using the link below:
+
+### Step 2:
+Go to project root and execute the following command in console to get the required dependencies:
+flutter pub get 
+	
+	
+
+		name: smart_ix
+		description: smart_ix home assistance.
+
+		publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+		version: 1.0.0+1
+
+		environment:
+		sdk: ">=2.17.1 <3.0.0"
+
+
+		dependencies:
+		flutter:
+		sdk: flutter
+		cupertino_icons: ^1.0.2
+		firebase_core: ^1.22.0
+		firebase_auth: ^3.8.0
+		cloud_firestore: ^3.4.8
+		equatable: ^2.0.5
+		google_sign_in: ^5.4.1
+		flow_builder: ^0.0.9
+		flutter_bloc: ^8.1.1
+		google_fonts: ^3.0.1
+		flutter_svg: ^1.1.5
+		json_annotation: ^4.6.0
+		path_provider: ^2.0.11
+		http: ^0.13.0
+		formz: ^0.4.1
+		google_nav_bar: ^5.0.6
+		geolocator: ^9.0.1
+
+
+
+		dev_dependencies:
+		flutter_test:
+		sdk: flutter
+		flutter_lints: ^2.0.0
+		mocktail: ^0.3.0
+		bloc_test: ^9.1.0
+		build_runner: ^2.2.0
+		json_serializable: ^6.3.1
+		plugin_platform_interface: ^2.1.2
+
+		flutter:
+		generate: true
+		uses-material-design: true
+
+	
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
