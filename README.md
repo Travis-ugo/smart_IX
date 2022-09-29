@@ -17,7 +17,7 @@ the smart Ix mobile applications are built with flutter.
 The smart Ix applications are built with flutter, so installing the flutter SDK on your machine is a must.
 Depending on the machine to be installed, flutter provides different versions of the SDK to suit your preferred operating system. 
 check out the link for more information regarding the installation of flutter in your machine.
-### https://docs.flutter.dev/get-started/install.
+#### https://docs.flutter.dev/get-started/install.
 
 ### A few resources to get you started if this is your first Flutter project:
 
