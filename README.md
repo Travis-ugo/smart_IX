@@ -31,10 +31,9 @@ samples, guidance on mobile development, and a full API reference.
 
 ### state management.✅
 
-the smart ix application implant the bloc pattern as its state management tool, 
+the smart ix application implements the bloc pattern as its state management tool, 
 Flutter bloc is state management for flutter applications, used to manage and handle all possible states of the application in an easy, 
 and more readable way.
-
 
 ### Key concepts:🦾
 
@@ -164,8 +163,6 @@ flutter pub get
 	formz: ^0.4.1
 	google_nav_bar: ^5.0.6
 	geolocator: ^9.0.1
-
-
 
 	dev_dependencies:
 	flutter_test:
