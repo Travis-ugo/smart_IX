@@ -84,7 +84,8 @@ the core folders include
 		
 	>> The WeatherRepository is responsible for abstracting the implementation of how weather data is fetched, using the metadata weather API to get current location weather conditions.  [metaApi documentation](https://docs.flutter.dev/](https://openweathermap.org/api/weather-map-1h),   
 
-###  The presentation layer implant the user interfaces, and all that is required of the user to see on the screen.
+###  The presentation layer:
+implements the user interfaces, and all that is required of the user to see on the screen.
 
 ## Folder Structure: 🗂
 
