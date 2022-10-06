@@ -42,11 +42,10 @@ void main() {
 
       test('make correct http request', () async {
         when(() => mockHttpResponse.statusCode).thenReturn(200);
-        // when(() => mockHttpResponse.body).thenReturn('{}');
+        when(() => mockHttpResponse.body).thenReturn('{}');
         when(() => httpClient.get(any()))
             .thenAnswer((_) async => mockHttpResponse);
         try {
-          // await metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon);
           await metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon);
         } catch (_) {}
         verify(
