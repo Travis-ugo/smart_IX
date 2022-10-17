@@ -25,10 +25,10 @@ class MetaAPiClient implements IMetaApiClient {
       'appid': '718bee2be81541e7f7436b792aaf1540',
       'units': 'imperial',
     };
-
-    final weatherRequestUri =
+    final weatherRequest =
         Uri.https(openWeatherApi, dataWeather, queryParameters);
-    final weatherResponse = await _httpClient.get(weatherRequestUri);
+
+    final weatherResponse = await _httpClient.get(weatherRequest);
 
     if (weatherResponse.statusCode != 200) {
       throw WeatherRequestFailure();

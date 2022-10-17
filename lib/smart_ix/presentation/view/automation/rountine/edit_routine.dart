@@ -9,7 +9,6 @@ class EditRoutine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const userId = Uuid();
     return BlocBuilder<RoutineCubit, RoutineState>(builder: (context, state) {
       return Scaffold(
         bottomNavigationBar: Container(
@@ -32,6 +31,8 @@ class EditRoutine extends StatelessWidget {
                   context
                       .read<RoutineCubit>()
                       .createRoutine(smartRoutines.userId);
+                  context.read<RoutineCubit>().cancelState();
+
                   Navigator.pop(context);
                 },
                 child: const Text('Save'),

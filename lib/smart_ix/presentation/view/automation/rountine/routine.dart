@@ -19,27 +19,27 @@ class CreateRoutine extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                BlocProvider.of<RoutineCubit>(context)
-                  ..routineAction('')
-                  ..routineTitle('')
-                  ..smartDevice('')
-                  ..smartDeviceState(false);
+                context.read<RoutineCubit>().cancelState();
+
                 Navigator.pop(context);
               },
               child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
-                showDialogFrame(
-                  context,
-                  onChanged: (String value) {
-                    context.read<RoutineCubit>().routineTitle(value);
-                  },
-                  onTap: () {
-                    BlocProvider.of<RoutineCubit>(context)
-                        .createRoutine(userId.v4());
-
-                    Navigator.of(context, rootNavigator: true).pop();
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertWidget(
+                      onChanged: (String value) {
+                        context.read<RoutineCubit>().routineTitle(value);
+                      },
+                      onTap: () {
+                        print('button pressed');
+                        context.read<RoutineCubit>().createRoutine(userId.v4());
+                        Navigator.of(context).pop();
+                      },
+                    );
                   },
                 );
               },

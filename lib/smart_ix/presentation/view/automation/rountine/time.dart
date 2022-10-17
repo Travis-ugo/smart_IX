@@ -18,7 +18,6 @@ class Time extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                BlocProvider.of<RoutineCubit>(context).routineAction('');
                 Navigator.pop(context);
               },
               child: const Text('Cancel'),
@@ -31,7 +30,6 @@ class Time extends StatelessWidget {
                   now = 'PM';
                 }
 
-                print('$hourState $minuteState $now');
                 BlocProvider.of<RoutineCubit>(context)
                     .routineAction('$hourState : $minuteState $now');
                 Navigator.pop(context);
@@ -53,20 +51,17 @@ class Time extends StatelessWidget {
                   itemCount: 13,
                   onChanged: (hour) {
                     hourState = hour;
-                    print(hourState);
                   },
                 ),
                 Wheel(
                   itemCount: 60,
                   onChanged: (minute) {
                     minuteState = minute;
-                    print(minuteState);
                   },
                 ),
                 WheelTime(
                   onChanged: (am) {
                     amState = am;
-                    print(amState);
                   },
                 ),
                 Container(height: 5, width: 20, color: Colors.grey),

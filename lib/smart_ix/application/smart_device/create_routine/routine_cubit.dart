@@ -40,6 +40,16 @@ class RoutineCubit extends Cubit<RoutineState> {
     emit(state.copyWith(smartDeviceState: value));
   }
 
+  void cancelState() {
+    emit(state.copyWith(
+      routineAction: '',
+      routineTitle: const Title.pure(),
+      smartDevice: '',
+      smartDeviceState: false,
+      status: FormzStatus.pure,
+    ));
+  }
+
   Future<void> createRoutine(String id) async {
     if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
@@ -54,6 +64,7 @@ class RoutineCubit extends Cubit<RoutineState> {
             smartDeviceState: state.smartDeviceState,
           ),
           id);
+
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } catch (_) {
       emit(state.copyWith(status: FormzStatus.submissionFailure));

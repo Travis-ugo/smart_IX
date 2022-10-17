@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:smart_ix/smart_ix/application/smart_device/create_routine/routine_bloc/routine_bloc.dart';
 import 'package:smart_ix/smart_ix/application/smart_device/create_routine/routine_cubit.dart';
 import 'package:smart_ix/smart_ix/presentation/view/automation/rountine/edit_routine.dart';

@@ -14,5 +14,6 @@ class User extends Equatable {
 
   bool get isNotEmpty => this != User.empty;
 
+  @override
   List<Object?> get props => [id, name, email, photo];
 }
