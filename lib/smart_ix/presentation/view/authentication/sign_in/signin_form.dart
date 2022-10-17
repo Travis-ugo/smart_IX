@@ -181,7 +181,6 @@ class _SwitchButton extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                print('button tapped');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const SignupPage()),

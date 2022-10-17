@@ -26,7 +26,6 @@ class _CentralWidgetState extends State<CentralWidget> {
         currentIndex: currentPageIndex,
         onTap: (index) => setState(() {
           currentPageIndex = index;
-          print(currentPageIndex);
         }),
         items: const [
           BottomNavigationBarItem(

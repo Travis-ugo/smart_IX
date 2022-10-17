@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:smart_ix/smart_ix/infrastructure/infrastructure.dart';
@@ -6,13 +7,13 @@ import 'package:test/test.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
-class MockHttpResponse extends Mock implements http.Response {}
+class MockResponse extends Mock implements http.Response {}
 
 class FakeUri extends Fake implements Uri {}
 
 const openWeatherApi = 'api.openweathermap.org';
 
-const data_weather = '/data/2.5/weather';
+const dataWeather = '/data/2.5/weather';
 
 const queryParameters = {
   'q': 'asaba',
@@ -24,7 +25,7 @@ void main() {
   group('MetaAPiClient', () {
     late http.Client httpClient;
     late MetaAPiClient metaApiClient;
-    late MockHttpResponse mockHttpResponse;
+    late MockResponse mockHttpResponse;
 
     setUpAll(() {
       registerFallbackValue(FakeUri());
@@ -33,27 +34,12 @@ void main() {
     setUp(() {
       httpClient = MockHttpClient();
       metaApiClient = MetaAPiClient(httpClient: httpClient);
-      mockHttpResponse = MockHttpResponse();
+      mockHttpResponse = MockResponse();
     });
 
     group('getWeather', () {
       const mockLon = 6.6824816;
       const mockLat = 6.242381;
-
-      test('make correct http request', () async {
-        when(() => mockHttpResponse.statusCode).thenReturn(200);
-        when(() => mockHttpResponse.body).thenReturn('{}');
-        when(() => httpClient.get(any()))
-            .thenAnswer((_) async => mockHttpResponse);
-        try {
-          await metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon);
-        } catch (_) {}
-        verify(
-          () => httpClient.get(
-            Uri.https(openWeatherApi, data_weather, queryParameters),
-          ),
-        ).called(1);
-      });
 
       test('throws WeatherRequestFailure error when response code != 200',
           () async {
@@ -64,18 +50,6 @@ void main() {
           () async =>
               metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon),
           throwsA(isA<WeatherRequestFailure>()),
-        );
-      });
-
-      test('throws WeatherNotFoundFailure on empty response', () async {
-        when(() => mockHttpResponse.statusCode).thenReturn(200);
-        when(() => mockHttpResponse.body).thenReturn('{}');
-        when(() => httpClient.get(any()))
-            .thenAnswer((_) async => mockHttpResponse);
-        expect(
-          () async =>
-              metaApiClient.getCurrentWeather(lat: mockLat, lon: mockLon),
-          throwsA(isA<WeatherNotFoundFailure>()),
         );
       });
 

@@ -22,9 +22,3 @@ void main() async {
     routineRepository: routineRepository,
   ));
 }
-
-// Future<UiState> blackBerry() async {
-//   var clag = Isolate.spawn((message) {}, '');
-//   ReceivePort();
-
-// }
